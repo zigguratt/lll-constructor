@@ -1,0 +1,39 @@
+;;; ---------------------------------------------------------------------------
+;;; @title Macros for the constructor parameter test.
+;;; @author Daniel Ellison <daniel@syrinx.net>
+
+(seq
+
+  ;; --------------------------------------------------------------------------
+  ;; Constant definitions.
+
+	;; Memory.
+  (def 'return-data 0x40)
+  (def 'code-length 0x60)
+  (def 'code-body   0x80)
+
+	;; Storage.
+	(def 'heartbeat  0x00)
+	(def 'parameters 0x01)
+
+  ;; Precomputed function IDs.
+  (def 'get-heartbeat  0x8d20ff14) ; getHeartbeat()
+  (def 'get-parameters 0xa5ea11da) ; getParameters()
+
+  ;; Jumping here causes an EVM error.
+  (def 'invalid-location 0x02)
+
+  ;; --------------------------------------------------------------------------
+  ;; @notice Extracts the four leftmost bytes of input.
+  ;; @param input A long number.
+
+  (def 'bytes4 (input)
+    (div input (exp 2 224)))
+
+  ;; --------------------------------------------------------------------------
+  ;; @notice Retrieves function ID from the first four bytes of the call data.
+
+  (def 'function-id
+    (bytes4 (calldataload 0x00)))
+
+)

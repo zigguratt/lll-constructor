@@ -1,0 +1,55 @@
+;;; ---------------------------------------------------------------------------
+;;; @title A constructor parameter test.
+;;; @author Daniel Ellison <daniel@syrinx.net>
+
+(seq
+
+  ;; --------------------------------------------------------------------------
+  ;; Start initialization.
+
+  (include "macros.lll")
+
+  ;; --------------------------------------------------------------------------
+	;; Compile the contract code body and store the resulting binary's length.
+
+  (mstore code-length (lll
+    (seq
+
+      ;; ----------------------------------------------------------------------
+      ;; @notice Returns contract heartbeat.
+      ;; @dev Signature: getHeartbeat()
+
+      (when (= function-id get-heartbeat)
+        (seq
+          (mstore return-data @@heartbeat)
+          (return return-data 32)))
+
+      ;; ----------------------------------------------------------------------
+      ;; @notice Returns constructor parameters.
+      ;; @dev Signature: getParameters()
+
+      (when (= function-id get-parameters)
+        (seq
+          (mstore return-data @@parameters)
+          (return return-data 32)))
+
+      ;; ----------------------------------------------------------------------
+      ;; @notice Fallback: No functions matched the function ID provided.
+
+      (jump invalid-location))
+
+    code-body))
+
+  ;; --------------------------------------------------------------------------
+  ;; Finish initialization.
+
+	;; Indicate that this contract is alive.
+	(sstore heartbeat 0xBC614E) ; Decimal 12345678.
+
+	;; Retrieve and store the constructor parameters.
+	(sstore parameters (mload (+ code-body @code-length)))
+
+	; Return the compiled constructor code.
+  (return code-body @code-length)
+
+)

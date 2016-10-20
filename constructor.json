@@ -1,0 +1,37 @@
+[
+    {
+        "constant": true,
+        "inputs": [],
+        "name": "getHeartbeat",
+        "outputs": [
+            {
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "payable": false,
+        "type": "function"
+    },
+    {
+        "constant": true,
+        "inputs": [],
+        "name": "getParameters",
+        "outputs": [
+            {
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "payable": false,
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "parm",
+                "type": "uint256"
+            }
+        ],
+        "type": "constructor"
+    }
+]
