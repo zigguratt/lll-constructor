@@ -10,7 +10,7 @@
   (include "macros.lll")
 
   ;; --------------------------------------------------------------------------
-	;; Compile the contract code body and store the resulting binary's length.
+  ;; Compile the contract code body and store the resulting binary's length.
 
   (mstore code-length (lll
     (seq
@@ -43,13 +43,13 @@
   ;; --------------------------------------------------------------------------
   ;; Finish initialization.
 
-	;; Indicate that this contract is alive.
-	(sstore heartbeat 0xBC614E) ; Decimal 12345678.
+  ;; Indicate that this contract is alive.
+  (sstore heartbeat 0xBC614E) ; Decimal 12345678.
 
-	;; Retrieve and store the constructor parameters.
-	(sstore parameters (mload (+ code-body @code-length)))
+  ;; Retrieve and store the constructor parameters.
+  (sstore parameters (mload (+ code-body @code-length)))
 
-	; Return the compiled constructor code.
+  ; Return the compiled constructor code.
   (return code-body @code-length)
 
 )

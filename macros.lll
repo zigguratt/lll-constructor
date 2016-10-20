@@ -7,14 +7,14 @@
   ;; --------------------------------------------------------------------------
   ;; Constant definitions.
 
-	;; Memory.
+  ;; Memory.
   (def 'return-data 0x40)
   (def 'code-length 0x60)
   (def 'code-body   0x80)
 
-	;; Storage.
-	(def 'heartbeat  0x00)
-	(def 'parameters 0x01)
+  ;; Storage.
+  (def 'heartbeat  0x00)
+  (def 'parameters 0x01)
 
   ;; Precomputed function IDs.
   (def 'get-heartbeat  0x8d20ff14) ; getHeartbeat()
