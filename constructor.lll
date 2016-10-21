@@ -10,7 +10,7 @@
   (include "macros.lll")
 
   ;; --------------------------------------------------------------------------
-  ;; Compile the contract code body and store the resulting binary's length.
+  ;; Compile the contract into `code-body` and record its length.
 
   (mstore code-length (lll
     (seq
