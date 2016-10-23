@@ -8,20 +8,19 @@
   ;; Constant definitions.
 
   ;; Memory.
-  (def 'return-data 0x40)
-  (def 'code-length 0x60)
-  (def 'code-body   0x80)
+  (def 'temporary   0x00)
+  (def 'return-data 0x20)
+  (def 'code-length 0x40)
+  (def 'code-body   0x60)
 
   ;; Storage.
-  (def 'heartbeat  0x00)
-  (def 'parameters 0x01)
+  (def 'parameter 0x00)
 
-  ;; Temporary `program-size` definition
+  ;; Temporary `program-size` definition.
   (def 'program-size (__pushsize))
 
   ;; Precomputed function IDs.
-  (def 'get-heartbeat  0x8d20ff14) ; getHeartbeat()
-  (def 'get-parameters 0xa5ea11da) ; getParameters()
+  (def 'get-parameter 0x40f4f7b9) ; getParameter()
 
   ;; Jumping here causes an EVM error.
   (def 'invalid-location 0x02)

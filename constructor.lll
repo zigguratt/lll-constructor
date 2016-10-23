@@ -16,21 +16,12 @@
     (seq
 
       ;; ----------------------------------------------------------------------
-      ;; @notice Returns contract heartbeat.
-      ;; @dev Signature: getHeartbeat()
+      ;; @notice Returns the constructor parameter.
+      ;; @dev Signature: getParameter()
 
-      (when (= function-id get-heartbeat)
+      (when (= function-id get-parameter)
         (seq
-          (mstore return-data @@heartbeat)
-          (return return-data 32)))
-
-      ;; ----------------------------------------------------------------------
-      ;; @notice Returns constructor parameters.
-      ;; @dev Signature: getParameters()
-
-      (when (= function-id get-parameters)
-        (seq
-          (mstore return-data @@parameters)
+          (mstore return-data @@parameter)
           (return return-data 32)))
 
       ;; ----------------------------------------------------------------------
@@ -43,16 +34,13 @@
   ;; --------------------------------------------------------------------------
   ;; Finish initialization.
 
-  ;; Indicate that this contract is alive.
-  (sstore heartbeat 0xBC614E) ; Decimal 12345678.
-
   ;; Copy the constructor parameters to memory.
-  (codecopy 0x00 program-size 32)
+  (codecopy temporary program-size 32)
 
-  ;; Store the constructor parameters.
-  (sstore parameters (mload 0x00))
+  ;; Move the constructor parameters to storage.
+  (sstore parameter @temporary)
 
-  ; Return the compiled constructor code.
+  ;; Return the compiled constructor code.
   (return code-body @code-length)
 
 )

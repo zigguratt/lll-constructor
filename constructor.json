@@ -2,20 +2,7 @@
     {
         "constant": true,
         "inputs": [],
-        "name": "getHeartbeat",
-        "outputs": [
-            {
-                "name": "",
-                "type": "uint256"
-            }
-        ],
-        "payable": false,
-        "type": "function"
-    },
-    {
-        "constant": true,
-        "inputs": [],
-        "name": "getParameters",
+        "name": "getParameter",
         "outputs": [
             {
                 "name": "",
@@ -28,7 +15,7 @@
     {
         "inputs": [
             {
-                "name": "parm",
+                "name": "parameter",
                 "type": "uint256"
             }
         ],
