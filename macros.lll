@@ -16,6 +16,9 @@
   (def 'heartbeat  0x00)
   (def 'parameters 0x01)
 
+  ;; Temporary `program-size` definition
+  (def 'program-size (__pushsize))
+
   ;; Precomputed function IDs.
   (def 'get-heartbeat  0x8d20ff14) ; getHeartbeat()
   (def 'get-parameters 0xa5ea11da) ; getParameters()

@@ -46,8 +46,11 @@
   ;; Indicate that this contract is alive.
   (sstore heartbeat 0xBC614E) ; Decimal 12345678.
 
-  ;; Retrieve and store the constructor parameters.
-  (sstore parameters (mload (+ code-body @code-length)))
+  ;; Copy the constructor parameters to memory.
+  (codecopy 0x00 program-size 32)
+
+  ;; Store the constructor parameters.
+  (sstore parameters (mload 0x00))
 
   ; Return the compiled constructor code.
   (return code-body @code-length)
