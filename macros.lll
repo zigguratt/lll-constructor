@@ -8,10 +8,9 @@
   ;; Constant definitions.
 
   ;; Memory.
-  (def 'temporary   0x00)
-  (def 'return-data 0x20)
-  (def 'code-length 0x40)
-  (def 'code-body   0x60)
+  (def 'temp-data   0x00)
+  (def 'code-length 0x20)
+  (def 'code-body   0x40)
 
   ;; Storage.
   (def 'parameter 0x00)

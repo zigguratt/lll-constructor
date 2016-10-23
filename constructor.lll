@@ -21,8 +21,8 @@
 
       (when (= function-id get-parameter)
         (seq
-          (mstore return-data @@parameter)
-          (return return-data 32)))
+          (mstore temp-data @@parameter)
+          (return temp-data 32)))
 
       ;; ----------------------------------------------------------------------
       ;; @notice Fallback: No functions matched the function ID provided.
@@ -34,11 +34,9 @@
   ;; --------------------------------------------------------------------------
   ;; Finish initialization.
 
-  ;; Copy the constructor parameters to memory.
-  (codecopy temporary program-size 32)
-
-  ;; Move the constructor parameters to storage.
-  (sstore parameter @temporary)
+  ;; Copy the constructor parameter to memory, then move it to storage.
+  (codecopy temp-data program-size 32)
+  (sstore parameter @temp-data)
 
   ;; Return the compiled constructor code.
   (return code-body @code-length)
