@@ -1,5 +1,5 @@
 ;;; ---------------------------------------------------------------------------
-;;; @title Macros for the constructor parameter test.
+;;; @title Macros for the constructor parameter demonstration.
 ;;; @author Daniel Ellison <daniel@syrinx.net>
 
 (seq
@@ -8,18 +8,14 @@
   ;; Constant definitions.
 
   ;; Memory.
-  (def 'temp-data   0x00)
-  (def 'code-length 0x20)
-  (def 'code-body   0x40)
+  (def 'temp-data 0x00)
+  (def 'code-body 0x20)
 
   ;; Storage.
   (def 'parameter 0x00)
 
-  ;; Temporary `program-size` definition.
-  (def 'program-size (__pushsize))
-
   ;; Precomputed function IDs.
-  (def 'get-parameter 0x40f4f7b9) ; getParameter()
+  (def 'get-parameter 0x40f4f7b9)
 
   ;; Jumping here causes an EVM error.
   (def 'invalid-location 0x02)
