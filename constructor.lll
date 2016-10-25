@@ -55,18 +55,20 @@
   (sstore parameter @temp-data)
 
   ;; --------------------------------------------------------------------------
-  ;; The following code compiles the body of the contract that we want to
-  ;; deploy to the blockchain and returns it to whomever invoked this
-  ;; initialization. In the `get-parameter` function you can see that it
-  ;; retrieves its constructor parameter from storage where we placed it on
-  ;; deployment.
+  ;; Compile the contract and return its location and length to the caller.
+  ;;
+  ;; The code within the `lll` operator's parentheses is the contract that will
+  ;; end up running on the blockchain. This is where the contract's functions
+  ;; reside.
 
   (return code-body (lll
     (seq
 
       ;; ----------------------------------------------------------------------
-      ;; @notice Returns the constructor parameter.
-      ;; @dev Signature: getParameter()
+      ;; Return the single constructor parameter.
+      ;;
+      ;; This function retrieves its constructor parameter from storage where
+      ;; we placed it on deployment.
 
       (when (= function-id get-parameter)
         (seq
@@ -74,7 +76,11 @@
           (return temp-data 32)))
 
       ;; ----------------------------------------------------------------------
-      ;; @notice Fallback: No functions matched the function ID provided.
+      ;; Fallback function: Cause an EVM error.
+      ;;
+      ;; No contract functions matched the ID provided. The convention in this
+      ;; case is to do the equivalent of Solidity's `throw` instruction. This
+      ;; is accompished by having the EVM jump to a known invalid location.
 
       (jump invalid-location))
 
