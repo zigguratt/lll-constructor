@@ -1,6 +1,5 @@
 ;;; ---------------------------------------------------------------------------
-;;; @title A constructor parameter demonstration.
-;;; @author Daniel Ellison <daniel@syrinx.net>
+;;; An LLL constructor demonstration.
 
 (seq
 

@@ -1,6 +1,5 @@
 ;;; ---------------------------------------------------------------------------
-;;; @title Macros for the constructor parameter demonstration.
-;;; @author Daniel Ellison <daniel@syrinx.net>
+;;; Macros for the LLL constructor demonstration.
 
 (seq
 
@@ -14,21 +13,20 @@
   ;; Storage.
   (def 'parameter 0x00)
 
-  ;; Precomputed function IDs.
+  ;; Precomputed function ID.
   (def 'get-parameter 0x40f4f7b9)
 
   ;; Jumping here causes an EVM error.
   (def 'invalid-location 0x02)
 
   ;; --------------------------------------------------------------------------
-  ;; @notice Extracts the four leftmost bytes of input.
-  ;; @param input A long number.
+  ;; Extract the four leftmost bytes of input.
 
   (def 'bytes4 (input)
     (div input (exp 2 224)))
 
   ;; --------------------------------------------------------------------------
-  ;; @notice Retrieves function ID from the first four bytes of the call data.
+  ;; Retrieve function ID from the first four bytes of the call data.
 
   (def 'function-id
     (bytes4 (calldataload 0x00)))
