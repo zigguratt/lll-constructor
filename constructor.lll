@@ -58,7 +58,8 @@
   ;;
   ;; The code within the `lll` operator's parentheses is the contract that will
   ;; end up running on the blockchain. This is where the contract's functions
-  ;; reside.
+  ;; reside. The `lll` operator will return the length of the compiled code.
+  ;; So it actually ends up as: `(return code-body code-length)`.
 
   (return code-body (lll
     (seq
@@ -69,7 +70,7 @@
       ;; This function retrieves its constructor parameter from storage where
       ;; we placed it on deployment.
 
-      (when (= function-id get-parameter)
+      (function get-parameter
         (seq
           (mstore temp-data @@parameter)
           (return temp-data 32)))
@@ -79,9 +80,9 @@
       ;;
       ;; No contract functions matched the ID provided. The convention in this
       ;; case is to do the equivalent of Solidity's `throw` instruction. This
-      ;; is accompished by having the EVM jump to a known invalid location.
+      ;; is accompished here by using the new `panic` keyword.
 
-      (jump invalid-location))
+      (panic))
 
     code-body))
 
