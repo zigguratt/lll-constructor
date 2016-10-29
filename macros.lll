@@ -16,9 +16,6 @@
   ;; Precomputed function ID.
   (def 'get-parameter 0x40f4f7b9)
 
-  ;; Jumping here causes an EVM error.
-  (def 'invalid-location 0x02)
-
   ;; --------------------------------------------------------------------------
   ;; Extract the four leftmost bytes of input.
 
