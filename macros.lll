@@ -17,7 +17,7 @@
   (def 'get-parameter 0x40f4f7b9)
 
   ;; --------------------------------------------------------------------------
-  ;; Extract the leftmost fiur bytes of input.
+  ;; Extract the leftmost four bytes of input.
 
   (def 'shift-right (input)
     (div input (exp 2 224)))
