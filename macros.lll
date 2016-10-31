@@ -30,4 +30,10 @@
     (when (= (shift-right (calldataload 0x00)) function-hash)
       code-body))
 
+  ;; --------------------------------------------------------------------------
+  ;; Allows a more intuitive way to determine whether to run a given code body.
+
+  (def 'function (hash code)
+    (when (= function-id hash) code))
+
 )
