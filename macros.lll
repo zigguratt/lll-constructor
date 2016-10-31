@@ -17,14 +17,15 @@
   (def 'get-parameter 0x40f4f7b9)
 
   ;; --------------------------------------------------------------------------
-  ;; Extract the four leftmost bytes of input.
+  ;; Extract the leftmost fiur bytes of input.
 
   (def 'shift-right (input)
     (div input (exp 2 224)))
 
   ;; --------------------------------------------------------------------------
-  ;; Determines whether the supplied function ID matches a known function hash.
-  ;; The function ID is in the leftmost four bytes of the call data.
+  ;; Determines whether the supplied function ID matches a known function hash
+  ;; and executes <code-body> if so. The function ID is in the leftmost four
+  ;; bytes of the call data.
 
   (def 'function (function-hash code-body)
     (when (= (shift-right (calldataload 0x00)) function-hash)
