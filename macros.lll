@@ -16,19 +16,18 @@
   ;; Precomputed function ID.
   (def 'get-parameter 0x40f4f7b9)
 
-  ;; Jumping here causes an EVM error.
-  (def 'invalid-location 0x02)
-
   ;; --------------------------------------------------------------------------
   ;; Extract the four leftmost bytes of input.
 
-  (def 'bytes4 (input)
+  (def 'shift-right (input)
     (div input (exp 2 224)))
 
   ;; --------------------------------------------------------------------------
-  ;; Retrieve function ID from the first four bytes of the call data.
+  ;; Determines whether the supplied function ID matches a known function hash.
+  ;; The function ID is in the leftmost four bytes of the call data.
 
-  (def 'function-id
-    (bytes4 (calldataload 0x00)))
+  (def 'function (function-hash code-body)
+    (when (= (shift-right (calldataload 0x00)) function-hash)
+      code-body))
 
 )

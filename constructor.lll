@@ -69,19 +69,19 @@
       ;; This function retrieves its constructor parameter from storage where
       ;; we placed it on deployment.
 
-      (when (= function-id get-parameter)
+      (function get-parameter
         (seq
           (mstore temp-data @@parameter)
           (return temp-data 32)))
 
       ;; ----------------------------------------------------------------------
-      ;; Fallback function: Cause an EVM error.
+      ;; Fallback function: Cause an EVM panic.
       ;;
       ;; No contract functions matched the ID provided. The convention in this
       ;; case is to do the equivalent of Solidity's `throw` instruction. This
-      ;; is accompished by having the EVM jump to a known invalid location.
+      ;; is accompished here by causing an EVM panic.
 
-      (jump invalid-location))
+      (panic))
 
     code-body))
 
