@@ -24,7 +24,7 @@
   ;;
   ;; The contract binary includes the init code as well as the contract code
   ;; we wish to deploy. The length of the contract binary minus the appended
-  ;; parameters is available as `(__pushsize)` This value points to the start
+  ;; parameters is available as `(bytecodesize)` This value points to the start
   ;; of the appended constructor parameters.
   ;;
   ;; In a real-world contract we could have multiple constructor parameters of
@@ -32,7 +32,7 @@
   ;; set aside for the `codecopy`. In this case there's only one parameter of
   ;; type `uint256`, so we need to set aside 32 bytes of memory.
 
-  (codecopy temp-data (__pushsize) 32)
+  (codecopy temp-data (bytecodesize) 32)
 
   ;; --------------------------------------------------------------------------
   ;; Move the constructor parameters to storage.
@@ -80,7 +80,7 @@
       ;;
       ;; No contract functions matched the ID provided. The convention in this
       ;; case is to do the equivalent of Solidity's `throw` instruction. This
-      ;; is accompished here by causing an EVM panic.
+      ;; is accomplished here by causing an EVM panic.
 
       (panic))
 
