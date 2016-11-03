@@ -8,9 +8,10 @@
   ;; --------------------------------------------------------------------------
   ;; Copy any constructor parameters to memory.
   ;;
-  ;; The constructor parameters are appended to the contract binary by whatever
-  ;; code is deploying the contract (usually `web3`). The type and number of
-  ;; parameters is specified in the ABI definition for the constructor, e.g.:
+  ;; The constructor parameters are appended to the contract bytecode by
+  ;; whatever code is deploying the contract (usually 'web3'). The type and
+  ;; number of parameters is specified in the ABI definition for the
+  ;; constructor, e.g.:
   ;;
   ;;   {
   ;;       "inputs": [
@@ -22,15 +23,15 @@
   ;;       "type": "constructor"
   ;;   }
   ;;
-  ;; The contract binary includes the init code as well as the contract code
-  ;; we wish to deploy. The length of the contract binary minus the appended
-  ;; parameters is available as `(bytecodesize)` This value points to the start
+  ;; The contract bytecode includes the init code as well as the contract code
+  ;; we wish to deploy. The size of the contract bytecode minus the appended
+  ;; parameters is available as '(bytecodesize)' This value points to the start
   ;; of the appended constructor parameters.
   ;;
   ;; In a real-world contract we could have multiple constructor parameters of
   ;; varying sizes. From the ABI we can determine how much memory we need to
-  ;; set aside for the `codecopy`. In this case there's only one parameter of
-  ;; type `uint256`, so we need to set aside 32 bytes of memory.
+  ;; set aside for the 'codecopy'. In this case there's only one parameter of
+  ;; type 'uint256', so we need to set aside 32 bytes of memory.
 
   (codecopy temp-data (bytecodesize) 32)
 
@@ -39,7 +40,7 @@
   ;;
   ;; Once the data has been copied to memory we can move each parameter to
   ;; permanent storage so that it's available to the running contract. This
-  ;; second step is necessary because `codecopy` can only copy to memory; it
+  ;; second step is necessary because 'codecopy' can only copy to memory; it
   ;; can't go directly to storage.
   ;;
   ;; Since the incoming data is ABI-encoded, there's a chance that some
@@ -56,10 +57,10 @@
   ;; --------------------------------------------------------------------------
   ;; Compile the contract and return its location and length to the caller.
   ;;
-  ;; The code within the `lll` operator's parentheses is the contract that will
+  ;; The code within the 'lll' operator's parentheses is the contract that will
   ;; end up running on the blockchain. This is where the contract's functions
-  ;; reside. The `lll` operator will return the length of the compiled code.
-  ;; So it actually ends up as: `(return code-body code-length)`.
+  ;; reside. The 'lll' operator will return the length of the compiled code.
+  ;; So it actually ends up as: '(return code-body code-length)'.
 
   (return code-body (lll
     (seq
@@ -79,7 +80,7 @@
       ;; Fallback function: Cause an EVM panic.
       ;;
       ;; No contract functions matched the ID provided. The convention in this
-      ;; case is to do the equivalent of Solidity's `throw` instruction. This
+      ;; case is to do the equivalent of Solidity's 'throw' instruction. This
       ;; is accomplished here by causing an EVM panic.
 
       (panic))
